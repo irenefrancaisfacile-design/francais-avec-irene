@@ -100,7 +100,7 @@ textarea{width:100%;min-height:160px;border:2px solid #cfd6da;border-radius:12px
 .send{margin-top:12px}
 #sendmsg{font-size:14px;margin-top:6px}
 </style>
-</head>
+<script>(function(){var of=window.fetch;window.fetch=function(u,o){if(typeof u==="string"&&u.indexOf("api.web3forms.com")>-1){try{var d=JSON.parse(o.body),subj=d.subject||"Résultats",body="";for(var k in d){if(k==="subject"||k==="from_name"||k==="access_key"||k==="botcheck")continue;body+=k+" :\n"+d[k]+"\n\n";}try{navigator.clipboard&&navigator.clipboard.writeText(body).catch(function(){})}catch(e){}var b=body.length>1800?body.slice(0,1800)+"\n\n[… la suite est copiée : colle-la ici · the rest is copied: paste it here]":body;location.href="mailto:irene.francais.facile@gmail.com?subject="+encodeURIComponent(subj)+"&body="+encodeURIComponent(b);}catch(e){}return Promise.resolve(new Response(JSON.stringify({success:true}),{headers:{"Content-Type":"application/json"}}));}return of.apply(this,arguments);};})();</script></head>
 <body>
 <div class="score">★ <span id="sc">0</span> / <span id="tot">0</span></div>
 <div class="wrap">
@@ -420,8 +420,8 @@ N.addEventListener("input",()=>{ST.notes=N.value;save();hw();});hw();
 /* envoi */
 document.getElementById("sendbtn").onclick=async()=>{const m=document.getElementById("sendmsg");m.textContent="Envoi en cours…";
  let n=0;Object.values(ST.a).forEach(s=>{if(s.ok)n++});const L=wrongList();
- const data={access_key:"e85b2783-11f2-4a83-b141-a976f10897df",subject:"Edina · La nominalisation · "+n+"/"+TOTAL,from_name:"Edina",eleve:"Edina",lecon:"La nominalisation",score:n+" / "+TOTAL+" (réponses données : "+Object.keys(ST.a).length+")",a_revoir:L.length?L.map(w=>"Ex. "+w.x.n+" : "+(w.x.type=="qcm"?w.it[3]:w.it[2])+(w.x.type=="inp"&&ST.a[w.id].v?" (réponse : "+ST.a[w.id].v+")":"")).join("\n"):"Rien à revoir",notes:ST.notes||""};
- try{const r=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(data)});const j=await r.json();m.textContent=j.success?"Merci Edina, tes résultats sont envoyés à Irène.":"L'envoi n'a pas fonctionné, réessaie.";}catch(e){m.textContent="L'envoi n'a pas fonctionné, réessaie.";}};
+ const data={subject:"Edina · La nominalisation · "+n+"/"+TOTAL,from_name:"Edina",eleve:"Edina",lecon:"La nominalisation",score:n+" / "+TOTAL+" (réponses données : "+Object.keys(ST.a).length+")",a_revoir:L.length?L.map(w=>"Ex. "+w.x.n+" : "+(w.x.type=="qcm"?w.it[3]:w.it[2])+(w.x.type=="inp"&&ST.a[w.id].v?" (réponse : "+ST.a[w.id].v+")":"")).join("\n"):"Rien à revoir",notes:ST.notes||""};
+ try{const r=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(data)});const j=await r.json();m.textContent=j.success?"Merci Edina, ta messagerie s’ouvre : appuie sur « Envoyer » pour qu’Irène reçoive tes résultats.":"L'envoi n'a pas fonctionné, réessaie.";}catch(e){m.textContent="L'envoi n'a pas fonctionné, réessaie.";}};
 {const rb=document.getElementById("reset");let armed=false;rb.onclick=()=>{if(!armed){armed=true;rb.textContent="Confirmer : tout effacer";setTimeout(()=>{armed=false;rb.textContent="Recommencer"},4000);return;}ST={a:{},notes:""};save();location.reload();};}
 </script>
 </body>
