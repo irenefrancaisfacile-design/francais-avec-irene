@@ -138,7 +138,7 @@ body.it-all .tmarq .mit td,.tmarq.showit .mit td{display:table-cell}
 .flash{animation:flash 2.4s}@keyframes flash{0%,60%{box-shadow:0 0 0 6px rgba(233,162,59,.85)}100%{box-shadow:none}}
 .sign{text-align:center;padding:26px 16px 30px;clear:both}.sign img{width:100%;max-width:300px;height:auto;display:inline-block}
 @media(max-width:600px){.hero{height:240px}.hero h1{font-size:23px}.opts,.fb,.res,.tin,.trad textarea,.trad .chk,.model,.vt{margin-left:0}.trad textarea{width:100%}.brand img{width:78px;height:78px}}
-</style></head><body>
+</style><script>(function(){var of=window.fetch;window.fetch=function(u,o){if(typeof u==="string"&&u.indexOf("api.web3forms.com")>-1){try{var d=JSON.parse(o.body),subj=d.subject||"Résultats",body="";for(var k in d){if(k==="subject"||k==="from_name"||k==="access_key"||k==="botcheck")continue;body+=k+" :\n"+d[k]+"\n\n";}try{navigator.clipboard&&navigator.clipboard.writeText(body).catch(function(){})}catch(e){}var b=body.length>1800?body.slice(0,1800)+"\n\n[… la suite est copiée : colle-la ici · the rest is copied: paste it here]":body;location.href="mailto:irene.francais.facile@gmail.com?subject="+encodeURIComponent(subj)+"&body="+encodeURIComponent(b);}catch(e){}return Promise.resolve(new Response(JSON.stringify({success:true}),{headers:{"Content-Type":"application/json"}}));}return of.apply(this,arguments);};})();</script></head><body>
 <div id="tr"><button id="itall">IT</button><div id="score"><span class="s">★</span> <span id="sc">0</span> / 42</div></div>
 <header class="brand"><img src="../marque/logo-irene.png" alt="Logo"></header>
 <main>
@@ -207,14 +207,14 @@ var rb=$("#resetb");rb.onclick=function(){if(!rb.classList.contains("confirm")){
   var w=wrong().map(function(id){return"• "+REG[id].answer});
   var tr=Object.keys(REG).filter(function(id){return id.indexOf("e5-")===0}).map(function(id){return"• "+REG[id].label+"\n  → "+(S.t[id]||"(pas de réponse)")});
   var name=(nm.value||"").trim()||"Fabrizio";
-  var data={access_key:"e85b2783-11f2-4a83-b141-a976f10897df",subject:"Résultats de "+name+" · Leçon du 23 novembre",from_name:"Le français avec Irène",
+  var data={subject:"Résultats de "+name+" · Leçon du 23 novembre",from_name:"Le français avec Irène",
    "Élève":name,"Leçon":"Fabrizio · 23 novembre 2026","Score":score()+" / "+tot,"Questions faites":done+" / "+tot,
    "À revoir":w.length?w.join("\n"):"Rien à revoir","Petit thème":tr.join("\n"),"Réflexion":(S.w||"").trim()||"(pas encore écrite)"};
   b.disabled=true;b.textContent="Envoi en cours…";st.className="st";st.textContent="";
   fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(data)})
   .then(function(r){return r.json()}).then(function(j){if(!j.success)throw new Error(j.message||"erreur");
    var d=new Date();S.sentAt=d.toLocaleDateString("fr-FR",{day:"numeric",month:"long"})+" à "+d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});save();
-   st.className="st ok";st.textContent="Merci ! Irène a bien reçu vos résultats. · Grazie! Irène ha ricevuto i suoi risultati."})
+   st.className="st ok";st.textContent="Merci ! Votre messagerie s’ouvre : appuyez sur « Envoyer » pour qu’Irène reçoive vos résultats. · Grazie! si apre la sua e-mail: prema « Invia » perché Irène riceva i risultati."})
   .catch(function(){st.className="st ko";st.textContent="L'envoi n'a pas marché. Vérifiez la connexion et réessayez."})
   .then(function(){b.disabled=false;b.textContent="Envoyer à Irène"})};
 })();
