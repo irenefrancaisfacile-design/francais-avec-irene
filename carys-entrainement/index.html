@@ -229,7 +229,7 @@ textarea.free{width:100%;border:2px solid #e8dfc0;border-radius:14px;padding:12p
 .mlist .mrule:nth-child(3n+2){background:#fdeef5;border-color:var(--coral)}.mlist .mrule:nth-child(3n){background:var(--sunl);border-color:var(--sun)}
 .mt{font:700 15px Outfit;color:var(--petrol);margin-bottom:2px}
 .mrule .line{margin:2px 0}.mrule .txt{font-size:15px}
-</style></head><body>
+</style><script>(function(){var of=window.fetch;window.fetch=function(u,o){if(typeof u==="string"&&u.indexOf("api.web3forms.com")>-1){try{var d=JSON.parse(o.body),subj=d.subject||"Résultats",body="";for(var k in d){if(k==="subject"||k==="from_name"||k==="access_key"||k==="botcheck")continue;body+=k+" :\n"+d[k]+"\n\n";}try{navigator.clipboard&&navigator.clipboard.writeText(body).catch(function(){})}catch(e){}var b=body.length>1800?body.slice(0,1800)+"\n\n[… la suite est copiée : colle-la ici · the rest is copied: paste it here]":body;location.href="mailto:irene.francais.facile@gmail.com?subject="+encodeURIComponent(subj)+"&body="+encodeURIComponent(b);}catch(e){}return Promise.resolve(new Response(JSON.stringify({success:true}),{headers:{"Content-Type":"application/json"}}));}return of.apply(this,arguments);};})();</script></head><body>
 <div id="top"><img id="logo" src="../marque/logo-irene.png" alt="Le français avec Irène"><div id="tr"><button id="itall">EN</button><div id="score"><span class="s">★</span> <span id="sc">0</span> / 36</div></div></div>
 <main>
 <div class="hero"><img src="img/hero.jpg" alt="" style="object-position:center 30%"><div class="ht"><div class="tag">DELF B2 · ENTRAÎNEMENT CIBLÉ</div><br><h1>Ne plus refaire les mêmes erreurs<span>Gérondif · subjonctif ou indicatif · hypothèse · pronoms</span><span class="hit">Never make the same mistakes again · gérondif · subjunctive or indicative · hypotheses · pronouns</span></h1></div></div><div class="cap0">Le sapin de Noël sous la coupole des Galeries Lafayette Haussmann, Paris, 2025</div>
@@ -348,14 +348,14 @@ var rb=$("#resetb");rb.onclick=function(){if(!rb.classList.contains("confirm")){
    else if(cl.contains("trad")){rep=((S.t&&S.t[el.id])||"").trim()||"(pas de traduction écrite)";rep+="  [elle a jugé sa traduction incorrecte]"}
    lines.push("• "+ex+(q?" : "+q:"")+"\n   ✗ Réponse de "+nm2+" : "+rep+"\n   ✓ Bonne réponse : "+bon+(bon!==full?"\n   Phrase correcte : "+full:"")+"\n   → Règle : "+lab)}});
   var txt=(S.f&&S.f.wprod||"").trim(),nw=txt?txt.split(/\s+/).length:0,name=(nm.value||"").trim()||"Carys";
-  var data={access_key:"e85b2783-11f2-4a83-b141-a976f10897df",subject:"Résultats de "+name+" · Entraînement DELF B2",from_name:"Le français avec Irène",
+  var data={subject:"Résultats de "+name+" · Entraînement DELF B2",from_name:"Le français avec Irène",
    "Élève":name,"Leçon":"Carys · Entraînement ciblé DELF B2 (gérondif, subjonctif, hypothèse, pronoms) · 25 novembre 2026",
    "Score":nOk()+" / "+TOTAL,"Questions faites":done+" / "+TOTAL,"À revoir":lines.length?lines.join("\n\n"):"Rien à revoir 🎉",
    "Production écrite · Une pub de Noël sans humains ?":txt?("("+nw+" mots)\n\n"+txt):"Pas encore écrite"};
   b.disabled=true;var lbl=b.textContent;b.textContent="Envoi en cours… · Sending…";st.className="st";st.textContent="";
   fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(data)}).then(function(r){return r.json()}).then(function(j){if(!j.success)throw new Error(j.message||"erreur");
    var d=new Date(),t=d.toLocaleDateString("fr-FR",{day:"numeric",month:"long"})+" à "+d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});try{localStorage.setItem(SK,t)}catch(e){}
-   st.className="st ok";st.textContent="Merci ! Irène a bien reçu tes résultats. · Thank you! Irène has received your results."}).catch(function(){st.className="st ko";st.textContent="L'envoi n'a pas marché. Vérifie ta connexion et réessaie. · Sending failed. Check your connection and try again."}).then(function(){b.disabled=false;b.textContent=lbl})}})();
+   st.className="st ok";st.textContent="Merci ! Ta messagerie s’ouvre : appuie sur « Envoyer » pour qu’Irène reçoive tes résultats. · Thank you! Your email app opens: press “Send” so Irène gets your results."}).catch(function(){st.className="st ko";st.textContent="L'envoi n'a pas marché. Vérifie ta connexion et réessaie. · Sending failed. Check your connection and try again."}).then(function(){b.disabled=false;b.textContent=lbl})}})();
 score();revoir();
 })();
 </script>
