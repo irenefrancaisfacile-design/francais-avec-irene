@@ -250,7 +250,7 @@ body.noit .done .after{display:none}
  .flip{height:230px}.bp{font-size:34px}
 }
 @media(max-width:470px){.vgrid{grid-template-columns:1fr}.fgrid{grid-template-columns:1fr 1fr}.flip{height:220px}.bex{font-size:13px}.two{grid-template-columns:1fr}.herocard{left:10px;right:10px;bottom:10px}}
-</style></head><body>
+</style><script>(function(){var of=window.fetch;window.fetch=function(u,o){if(typeof u==="string"&&u.indexOf("api.web3forms.com")>-1){try{var d=JSON.parse(o.body),subj=d.subject||"Résultats",body="";for(var k in d){if(k==="subject"||k==="from_name"||k==="access_key"||k==="botcheck")continue;body+=k+" :\n"+d[k]+"\n\n";}try{navigator.clipboard&&navigator.clipboard.writeText(body).catch(function(){})}catch(e){}var b=body.length>1800?body.slice(0,1800)+"\n\n[… la suite est copiée : colle-la ici · the rest is copied: paste it here]":body;location.href="mailto:irene.francais.facile@gmail.com?subject="+encodeURIComponent(subj)+"&body="+encodeURIComponent(b);}catch(e){}return Promise.resolve(new Response(JSON.stringify({success:true}),{headers:{"Content-Type":"application/json"}}));}return of.apply(this,arguments);};})();</script></head><body>
 <div class="score" id="score"><span>💖</span><b id="sc">0</b><small>/ <span id="tot">0</span></small></div>
 <button class="ittog" id="ittog" type="button">🇮🇹 <span>Traduzione</span></button>
 <div class="hearts-bg" aria-hidden="true"></div>
@@ -544,14 +544,14 @@ $("#reset").addEventListener("click",function(){if(!window.confirm("Effacer tout
   var w=Object.keys(REG).filter(function(k){return S.items[k]&&!S.items[k].ok}).map(function(k){return "• "+EXN[REG[k].ex]+" · "+REG[k].label+" → "+REG[k].answer});
   var md=["ex1","ex2","ex3","ex4","ex5","ex6"].map(function(e){var t=S.medals[e];return EXN[e]+" : "+(t?MC[t][3].replace("Médaille ","").replace("d'","").replace("de ",""):"pas encore faite")}).join("\n");
   var name=(nm.value||"").trim()||"Élève";
-  var data={access_key:"e85b2783-11f2-4a83-b141-a976f10897df",subject:"Résultats de "+name+" · Le passé composé",from_name:"Le français avec Irène",
+  var data={subject:"Résultats de "+name+" · Le passé composé",from_name:"Le français avec Irène",
    "Élève":name,"Leçon":"Giulia · Hier, j'ai dansé ! (passé composé)","Score":score()+" / "+TOT,"Questions faites":done+" / "+TOT,"Médailles":md,
    "À revoir":w.length?w.join("\n"):"Rien à revoir 🎉"};
   b.disabled=true;b.textContent="Envoi en cours…";st.className="st";st.textContent="";
   fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(data)})
   .then(function(r){return r.json()}).then(function(j){if(!j.success)throw new Error(j.message||"erreur");
    S.sentAt=new Date().toLocaleDateString("fr-FR",{day:"numeric",month:"long"})+" à "+new Date().toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});save();
-   st.className="st ok";st.textContent="Merci ! Irène a bien reçu tes résultats. 💖"})
+   st.className="st ok";st.textContent="Merci ! Ta messagerie s’ouvre : appuie sur « Envoyer » pour qu’Irène reçoive tes résultats. 💖"})
   .catch(function(){st.className="st ko";st.textContent="L'envoi n'a pas marché. Vérifie ta connexion et réessaie."})
   .then(function(){b.disabled=false;b.textContent="Envoyer à Irène"})}})();
 })();
