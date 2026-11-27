@@ -141,7 +141,7 @@ body.it-all .tmarq .mit td,.tmarq.showit .mit td{display:table-cell}
 
 .tab td.c{font-weight:800;color:var(--pine)}.para .txt{font-size:16px}.sh{margin-top:40px}
 .toc{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.toc a{background:#fff;border:2px solid #e3e0f0;border-radius:99px;padding:3px 11px;font-size:13px;font-weight:800;color:var(--pine);text-decoration:none}
-</style></head><body>
+</style><script>(function(){var of=window.fetch;window.fetch=function(u,o){if(typeof u==="string"&&u.indexOf("api.web3forms.com")>-1){try{var d=JSON.parse(o.body),subj=d.subject||"Résultats",body="";for(var k in d){if(k==="subject"||k==="from_name"||k==="access_key"||k==="botcheck")continue;body+=k+" :\n"+d[k]+"\n\n";}try{navigator.clipboard&&navigator.clipboard.writeText(body).catch(function(){})}catch(e){}var b=body.length>1800?body.slice(0,1800)+"\n\n[… la suite est copiée : colle-la ici · the rest is copied: paste it here]":body;location.href="mailto:irene.francais.facile@gmail.com?subject="+encodeURIComponent(subj)+"&body="+encodeURIComponent(b);}catch(e){}return Promise.resolve(new Response(JSON.stringify({success:true}),{headers:{"Content-Type":"application/json"}}));}return of.apply(this,arguments);};})();</script></head><body>
 <div id="tr"><button id="itall">EN</button><div id="score"><span class="s">★</span> <span id="sc">0</span> / 119</div></div>
 <header class="brand"><img src="../marque/logo-irene.png" alt="Logo"></header>
 <main>
@@ -206,14 +206,14 @@ var rb=$("#resetb");rb.onclick=function(){if(!rb.classList.contains("confirm")){
  b.onclick=function(){var tot=Object.keys(REG).length,done=Object.keys(REG).filter(function(id){return S.a[id]}).length;
   var w=wrong().map(function(id){return"• "+REG[id].answer});
     var name=(nm.value||"").trim()||"Penka";
-  var data={access_key:"e85b2783-11f2-4a83-b141-a976f10897df",subject:"Résultats de "+name+" · Grande révision du 23 novembre",from_name:"Le français avec Irène",
+  var data={subject:"Résultats de "+name+" · Grande révision du 23 novembre",from_name:"Le français avec Irène",
    "Élève":name,"Leçon":"Penka · grande révision · 23 novembre 2026","Score":score()+" / "+tot,"Questions faites":done+" / "+tot,
    "À revoir":w.length?w.join("\n"):"Rien à revoir"};
   b.disabled=true;b.textContent="Envoi en cours…";st.className="st";st.textContent="";
   fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(data)})
   .then(function(r){return r.json()}).then(function(j){if(!j.success)throw new Error(j.message||"erreur");
    var d=new Date();S.sentAt=d.toLocaleDateString("fr-FR",{day:"numeric",month:"long"})+" à "+d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});save();
-   st.className="st ok";st.textContent="Merci ! Irène a bien reçu tes résultats. · Thanks! Irène has received your results."})
+   st.className="st ok";st.textContent="Merci ! Ta messagerie s’ouvre : appuie sur « Envoyer » pour qu’Irène reçoive tes résultats. · Thanks! Your email app opens: press “Send” so Irène gets your results."})
   .catch(function(){st.className="st ko";st.textContent="L'envoi n'a pas marché. Vérifie la connexion et réessaie."})
   .then(function(){b.disabled=false;b.textContent="Envoyer à Irène"})};
 })();
