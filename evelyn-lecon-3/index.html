@@ -254,7 +254,7 @@ nav button.done::after{content:"✓";color:var(--ok);font-size:20px;line-height:
  .pets{grid-template-columns:repeat(2,1fr)}.mcards{grid-template-columns:1fr}.conj{grid-template-columns:repeat(2,1fr)}
  .parrot span{font-size:15px;white-space:nowrap;padding:3px 10px}.count{font-size:46px}.fam{gap:8px}.fam .i3,.pic .i3{width:52px;height:52px}.party .i3.l{width:84px;height:84px} .wheelw,.wheel{width:270px;height:270px}.qrow .q{font-size:26px}.chs3 .ch{font-size:21px}}
 </style>
-</head>
+<script>(function(){var of=window.fetch;window.fetch=function(u,o){if(typeof u==="string"&&u.indexOf("api.web3forms.com")>-1){try{var d=JSON.parse(o.body),subj=d.subject||"Résultats",body="";for(var k in d){if(k==="subject"||k==="from_name"||k==="access_key"||k==="botcheck")continue;body+=k+" :\n"+d[k]+"\n\n";}try{navigator.clipboard&&navigator.clipboard.writeText(body).catch(function(){})}catch(e){}var b=body.length>1800?body.slice(0,1800)+"\n\n[… la suite est copiée : colle-la ici · the rest is copied: paste it here]":body;location.href="mailto:irene.francais.facile@gmail.com?subject="+encodeURIComponent(subj)+"&body="+encodeURIComponent(b);}catch(e){}return Promise.resolve(new Response(JSON.stringify({success:true}),{headers:{"Content-Type":"application/json"}}));}return of.apply(this,arguments);};})();</script></head>
 <body>
 <div id="score">⭐ <span id="sc">0</span> / <span id="tot">0</span></div>
 <div class="wrap">
@@ -527,12 +527,12 @@ async function sendResults(){ const b=document.getElementById("sendbtn"), st=doc
   const w=wrongList().map(x=>"• "+x.game+" : "+x.q+"\n   ✗ Réponse d'Evelyn : "+x.c+"\n   ✓ Bonne réponse : "+x.a+"\n   → Règle : "+names[x.r]);
   const per=SCREENS.filter(s=>s.p).map(s=>s.name+" : "+okCount(s.p,s.n)+" / "+s.n).join("\n");
   const oral=Object.keys(S.said).length;
-  const data={access_key:"e85b2783-11f2-4a83-b141-a976f10897df",subject:"Résultats d'Evelyn · Leçon 3 « J'ai sept ans ! »",from_name:"Le français avec Irène",
+  const data={subject:"Résultats d'Evelyn · Leçon 3 « J'ai sept ans ! »",from_name:"Le français avec Irène",
     "Élève":"Evelyn","Leçon":"Leçon 3 · Le verbe avoir (âge, famille, animaux, ne… pas de, mon/ma/mes)","Score":ok+" / "+TOTAL,"Questions faites":n+" / "+TOTAL,
     "Détail par jeu":per,"À revoir":w.length?w.join("\n\n"):"Rien à revoir","Oral (roue + mes phrases écoutées)":oral+" / "+(D.ROUE.length+D.PHRASES.length)};
   b.disabled=true; b.textContent="Envoi en cours…"; st.textContent="";
   try{ const r=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(data)}); const j=await r.json(); if(!j.success) throw new Error(j.message||"erreur");
-    S.sentAt=new Date().toLocaleDateString("fr-FR",{day:"numeric",month:"long"})+" à "+new Date().toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}); save(); st.style.color="var(--ok)"; st.textContent="Merci Evelyn ! Irène a bien reçu tes résultats. 💖"; stars(b); }
+    S.sentAt=new Date().toLocaleDateString("fr-FR",{day:"numeric",month:"long"})+" à "+new Date().toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}); save(); st.style.color="var(--ok)"; st.textContent="Merci Evelyn ! Ta messagerie s’ouvre : appuie sur « Envoyer » pour qu’Irène reçoive tes résultats. 💖"; stars(b); }
   catch(e){ st.style.color="var(--ko)"; st.textContent="L'envoi n'a pas fonctionné. Vérifie la connexion et réessaie."; }
   b.disabled=false; b.textContent="Envoyer à Irène ✉️"; }
 function goRule(id){ show("rappel"); setTimeout(()=>{ const e=document.getElementById(id); if(!e) return; e.scrollIntoView({behavior:"smooth",block:"center"}); e.classList.remove("flash"); void e.offsetWidth; e.classList.add("flash"); },150); }
