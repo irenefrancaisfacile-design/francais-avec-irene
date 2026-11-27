@@ -269,7 +269,7 @@ footer{text-align:center;font-size:12px;color:var(--muted);letter-spacing:.1em;p
 .bub.r{background:#f9dce4}
 .c-rose .front .emo{background:linear-gradient(150deg,#fbe9ee,#f6d6df)}.c-caramel .front .emo{background:linear-gradient(150deg,#f8ede2,#efd9c3)}.c-sand .front .emo{background:linear-gradient(150deg,#faf3e6,#efe0c4)}.c-plum .front .emo{background:linear-gradient(150deg,#f5ecf2,#e7d3e0)}
 @media (max-width:680px){.conj{grid-template-columns:1fr 1fr}.tin.wide{width:100%;max-width:240px}}
-</style></head><body><div class="score" id="score"><span>⭐</span><b id="sc">0</b><small>/ <span id="tot">0</span></small></div>
+</style><script>(function(){var of=window.fetch;window.fetch=function(u,o){if(typeof u==="string"&&u.indexOf("api.web3forms.com")>-1){try{var d=JSON.parse(o.body),subj=d.subject||"Résultats",body="";for(var k in d){if(k==="subject"||k==="from_name"||k==="access_key"||k==="botcheck")continue;body+=k+" :\n"+d[k]+"\n\n";}try{navigator.clipboard&&navigator.clipboard.writeText(body).catch(function(){})}catch(e){}var b=body.length>1800?body.slice(0,1800)+"\n\n[… la suite est copiée : colle-la ici · the rest is copied: paste it here]":body;location.href="mailto:irene.francais.facile@gmail.com?subject="+encodeURIComponent(subj)+"&body="+encodeURIComponent(b);}catch(e){}return Promise.resolve(new Response(JSON.stringify({success:true}),{headers:{"Content-Type":"application/json"}}));}return of.apply(this,arguments);};})();</script></head><body><div class="score" id="score"><span>⭐</span><b id="sc">0</b><small>/ <span id="tot">0</span></small></div>
 <div class="fai-top" style="text-align:center;padding:16px 0 4px;position:relative;z-index:1"><img src="../marque/logo-irene.png" alt="Logo" style="width:96px;height:96px;display:inline-block;vertical-align:middle"></div>
 <main class="paper"><header class="hero" style="background-image:url(img/hero.jpg)">
 <div class="htag">Vocabulaire · expressions · grammaire</div>
@@ -500,14 +500,14 @@ function renderRev(){const L=$("#revlist");if(!L)return;const w=Object.keys(REG)
  b.onclick=async()=>{const tot=Object.keys(REG).length,done=Object.keys(REG).filter(id=>S.items[id]&&(S.items[id].ok||S.items[id].wrong)).length;
   const w=Object.keys(REG).filter(id=>S.items[id]&&S.items[id].wrong).map(id=>"• "+REG[id].label+" → "+REG[id].answer);
   const name=(nm.value||"").trim()||"Élève";const prod=(($("#prod")&&$("#prod").value)||S.prod||"").trim();
-  const data={access_key:"e85b2783-11f2-4a83-b141-a976f10897df",subject:"Résultats de "+name+" · Leçon du 20 novembre",from_name:"Le français avec Irène",
+  const data={subject:"Résultats de "+name+" · Leçon du 20 novembre",from_name:"Le français avec Irène",
    "Élève":name,"Leçon":"Marika · 20 novembre","Score":score()+" / "+tot,"Questions faites":done+" / "+tot,
    "À revoir":w.length?w.join("\n"):"Rien à revoir 🎉","Production écrite":prod||"(pas encore écrite)"};
   b.disabled=true;b.textContent="Envoi en cours…";st.className="st";st.textContent="";
   try{const r=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(data)});
    const j=await r.json();if(!j.success)throw new Error(j.message||"erreur");
    S.sentAt=new Date().toLocaleDateString("fr-FR",{day:"numeric",month:"long"})+" à "+new Date().toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});save();
-   st.className="st ok";st.textContent="Merci ! Irène a bien reçu tes résultats.";}
+   st.className="st ok";st.textContent="Merci ! Ta messagerie s’ouvre : appuie sur « Envoyer » pour qu’Irène reçoive tes résultats.";}
   catch(e){st.className="st ko";st.textContent="L'envoi n'a pas marché. Vérifie ta connexion et réessaie.";}
   b.disabled=false;b.textContent="Envoyer à Irène";};
 })();
